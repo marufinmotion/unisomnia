@@ -2,6 +2,8 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
+import cloudflare from '@astrojs/cloudflare';
+
 /**
  * remarkCountrySections — single zero-dep remark plugin.
  *  1. Parses trailing `{#id}` on any heading and emits a stable HTML id
@@ -77,15 +79,20 @@ function remarkCountrySections() {
 // https://astro.build/config
 export default defineConfig({
   site: 'https://unisomnia.org',
+
   i18n: {
     defaultLocale: 'ru',
     locales: ['ru', 'tg'],
     routing: { prefixDefaultLocale: true },
   },
+
   markdown: {
     remarkPlugins: [remarkCountrySections],
   },
+
   vite: {
     plugins: [tailwindcss()],
   },
+
+  adapter: cloudflare()
 });
