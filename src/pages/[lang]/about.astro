@@ -1,0 +1,45 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getStrings, LANGS, CONTACT_EMAIL } from '../../i18n';
+import type { Lang } from '../../i18n';
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+const t = getStrings(lang);
+---
+
+<Layout lang={lang} title={t.about.heading}>
+  <section class="page-container py-20">
+    <header class="mb-14 max-w-2xl">
+      <p class="eyebrow mb-3">{t.about.eyebrow}</p>
+      <h1 class="text-5xl">{t.about.heading}</h1>
+    </header>
+
+    <div class="prose-column space-y-12">
+      <div>
+        <p class="eyebrow mb-2">{t.about.missionTitle}</p>
+        <p class="text-lg leading-relaxed">{t.about.mission}</p>
+      </div>
+      <div>
+        <p class="eyebrow mb-2">{t.about.whoTitle}</p>
+        <p class="text-lg leading-relaxed">{t.about.who}</p>
+      </div>
+      <div>
+        <p class="eyebrow mb-2">{t.about.sourcesTitle}</p>
+        <p class="text-lg leading-relaxed">{t.about.sources}</p>
+      </div>
+      <div>
+        <p class="eyebrow mb-2">{t.about.contactTitle}</p>
+        <p class="text-lg leading-relaxed">
+          <a
+            href={`mailto:${CONTACT_EMAIL}`}
+            class="underline decoration-[color:var(--color-rule)] underline-offset-4 hover:decoration-[color:var(--color-red)] transition"
+          >{CONTACT_EMAIL}</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

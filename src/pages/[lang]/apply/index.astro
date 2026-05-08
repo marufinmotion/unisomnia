@@ -1,0 +1,137 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getStrings, LANGS } from '../../../i18n';
+import type { Lang } from '../../../i18n';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+const t = getStrings(lang);
+
+const all = await getCollection('countries');
+const countries = all
+  .filter((entry) => entry.id.startsWith(`${lang}/`))
+  .map((entry) => ({
+    slug: entry.data.slug,
+    name: entry.data.name,
+    flag: entry.data.flag,
+    tag: entry.data.tag ?? '',
+    monthly: entry.data.monthlyCostUSD,
+    order: entry.data.order,
+    status: entry.data.status,
+  }))
+  .sort((a, b) => a.order - b.order);
+---
+
+<Layout lang={lang} title={t.apply.heading}>
+  <section class="page-container py-16 md:py-24">
+    <header class="mb-14 max-w-2xl">
+      <span aria-hidden="true" class="block w-[60px] h-[1.5px] bg-[color:var(--color-red)] mb-5"></span>
+      <p
+        class="mb-3"
+        style="font-family: var(--font-display); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--color-red); font-weight: 500;"
+      >
+        {t.apply.eyebrow}
+      </p>
+      <h1
+        class="mb-5"
+        style="font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 600; line-height: 1.04; letter-spacing: -0.02em;"
+      >
+        {t.apply.heading}
+      </h1>
+      <p class="text-lg text-[color:var(--color-ink-muted)] text-balance">{t.apply.sub}</p>
+    </header>
+
+    <div class="mb-14 border-t border-[color:var(--color-rule)] pt-8">
+      <label class="block">
+        <span class="sr-only">{t.apply.filterPlaceholder}</span>
+        <input
+          type="search"
+          id="country-filter"
+          placeholder={t.apply.filterPlaceholder}
+          autocomplete="off"
+          class="w-full max-w-md border-0 border-b border-[color:var(--color-rule)] bg-transparent px-1 py-3 text-base text-[color:var(--color-ink)] placeholder:text-[color:var(--color-ink-muted)] focus:border-[color:var(--color-red)] focus:outline-none focus:ring-0 transition-colors"
+        />
+      </label>
+    </div>
+
+    <ul id="country-grid" class="grid grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+      {countries.map((c, i) => {
+        const isComingSoon = c.status === 'coming-soon';
+        return (
+          <li data-country-name={c.name.toLowerCase()}>
+            <a
+              href={`/${lang}/apply/${c.slug}`}
+              class={
+                isComingSoon
+                  ? 'block border-t border-[color:var(--color-rule)] pt-6 cursor-default relative'
+                  : 'group block border-t border-[color:var(--color-rule)] pt-6'
+              }
+              aria-label={isComingSoon ? `${c.name} — ${t.apply.comingSoonBadge}` : c.name}
+            >
+              {isComingSoon && (
+                <span
+                  class="absolute right-0 top-6 inline-block rounded-full bg-[color:var(--color-red)] text-[color:var(--color-beige)] px-3 py-1 leading-none"
+                  style="font-family: var(--font-body); font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.14em; font-weight: 500;"
+                >
+                  {t.apply.comingSoonBadge}
+                </span>
+              )}
+              <div class={isComingSoon ? 'opacity-60' : ''}>
+                <div class="mb-6 flex items-baseline justify-between">
+                  <span class="text-5xl leading-none">{c.flag}</span>
+                  <span
+                    class="text-[color:var(--color-ink-muted)]"
+                    style="font-family: var(--font-display); font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase;"
+                  >{String(i + 1).padStart(2, '0')}</span>
+                </div>
+                <h2
+                  class={
+                    isComingSoon
+                      ? 'mb-2'
+                      : 'mb-2 group-hover:[text-decoration:underline] group-hover:[text-decoration-color:var(--color-red)] group-hover:[text-decoration-thickness:1.5px] group-hover:underline-offset-[6px]'
+                  }
+                  style="font-family: var(--font-display); font-size: 1.625rem; font-weight: 600; letter-spacing: -0.01em;"
+                >
+                  {c.name}
+                </h2>
+                {c.tag && <p class="text-sm text-[color:var(--color-ink-muted)]">{c.tag}</p>}
+                <p class="mt-3 text-xs text-[color:var(--color-ink-muted)] tabular-nums">
+                  ${c.monthly}{t.apply.perMonth}
+                </p>
+              </div>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+
+    <p id="country-empty" hidden class="mt-16 text-center text-[color:var(--color-ink-muted)]">
+      {t.apply.empty}
+    </p>
+  </section>
+
+  <script is:inline>
+    (function () {
+      const input = document.getElementById('country-filter');
+      const grid = document.getElementById('country-grid');
+      const empty = document.getElementById('country-empty');
+      if (!input || !grid || !empty) return;
+      const items = Array.from(grid.querySelectorAll('[data-country-name]'));
+      input.addEventListener('input', () => {
+        const q = input.value.trim().toLowerCase();
+        let shown = 0;
+        for (const li of items) {
+          const name = li.getAttribute('data-country-name') || '';
+          const match = name.includes(q);
+          li.hidden = !match;
+          if (match) shown++;
+        }
+        empty.hidden = shown !== 0;
+      });
+    })();
+  </script>
+</Layout>

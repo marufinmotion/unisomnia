@@ -1,0 +1,17 @@
+# Cloudflare Pages redirects
+# Docs: https://developers.cloudflare.com/pages/configuration/redirects/
+#
+# NOTE: src/pages/index.astro already serves a localStorage-aware client-side
+# redirect (with <meta http-equiv="refresh"> as the JS-disabled fallback).
+# We don't add a server-side `/ → /ru/` 302 here, because that would override
+# the client logic and break the saved-language preference.
+#
+# Trailing-slash hygiene: send the no-trailing-slash forms to canonical URLs.
+/ru        /ru/        301
+/tg        /tg/        301
+/ru/apply  /ru/apply/  301
+/tg/apply  /tg/apply/  301
+/ru/about  /ru/about/  301
+/tg/about  /tg/about/  301
+/ru/search /ru/search/ 301
+/tg/search /tg/search/ 301

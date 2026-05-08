@@ -1,0 +1,53 @@
+---
+import { LANGS, LANG_LABELS, getStrings } from '../i18n';
+import type { Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getStrings(lang);
+
+// Build the equivalent path in the other language by swapping the leading segment
+const path = Astro.url.pathname;
+function pathFor(target: Lang): string {
+  if (path === '/' || path === '') return `/${target}/`;
+  if (path.startsWith('/ru/') || path === '/ru') return path.replace(/^\/ru/, `/${target}`);
+  if (path.startsWith('/tg/') || path === '/tg') return path.replace(/^\/tg/, `/${target}`);
+  return `/${target}/`;
+}
+---
+
+<nav aria-label={t.footer.switcherLabel} class="flex items-center gap-2 text-sm">
+  {LANGS.map((code, i) => (
+    <>
+      {i > 0 && <span aria-hidden="true" class="text-[color:var(--color-rule)]">/</span>}
+      <a
+        href={pathFor(code)}
+        data-lang-link={code}
+        aria-current={code === lang ? 'true' : undefined}
+        class={
+          code === lang
+            ? 'font-medium text-[color:var(--color-red)]'
+            : 'text-[color:var(--color-ink-muted)] hover:text-[color:var(--color-ink)] transition-colors'
+        }
+      >
+        {LANG_LABELS[code]}
+      </a>
+    </>
+  ))}
+</nav>
+
+<script is:inline>
+  // Save preference on switch
+  document.addEventListener('click', (e) => {
+    const t = e.target;
+    if (!(t instanceof HTMLElement)) return;
+    const link = t.closest('[data-lang-link]');
+    if (!link) return;
+    try {
+      localStorage.setItem('unisomnia.lang', link.getAttribute('data-lang-link'));
+    } catch (_) {}
+  });
+</script>

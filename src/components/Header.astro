@@ -1,0 +1,72 @@
+---
+import { getStrings } from '../i18n';
+import type { Lang } from '../i18n';
+import Logo from './Logo.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import SearchTrigger from './SearchTrigger.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = getStrings(lang);
+
+const navItems = [
+  { href: `/${lang}/apply`, label: t.nav.apply },
+  { href: `/${lang}/about`, label: t.nav.about },
+];
+
+const path = Astro.url.pathname;
+function isActive(href: string): boolean {
+  if (href.endsWith('/apply')) return path.startsWith(href);
+  return path === href || path === href + '/';
+}
+---
+
+<header class="border-b border-[color:var(--color-rule)] bg-[color:var(--color-beige)]">
+  <div class="page-container flex h-16 items-center justify-between gap-6">
+    <a href={`/${lang}/`} class="flex items-center" aria-label={t.siteName}>
+      <Logo size="md" />
+    </a>
+
+    <nav aria-label="Primary" class="hidden md:flex items-center gap-8 text-sm">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class={
+            isActive(item.href)
+              ? 'text-[color:var(--color-red)] font-medium'
+              : 'text-[color:var(--color-ink)] hover:text-[color:var(--color-red)] transition-colors'
+          }
+          aria-current={isActive(item.href) ? 'page' : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <SearchTrigger lang={lang} />
+      <span aria-hidden="true" class="hidden sm:inline-block h-4 w-px bg-[color:var(--color-rule)]"></span>
+      <LanguageSwitcher lang={lang} />
+    </div>
+  </div>
+
+  <nav aria-label="Primary mobile" class="md:hidden border-t border-[color:var(--color-rule)]">
+    <div class="page-container flex h-12 items-center gap-6 text-sm">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class={
+            isActive(item.href)
+              ? 'text-[color:var(--color-red)] font-medium'
+              : 'text-[color:var(--color-ink)]'
+          }
+          aria-current={isActive(item.href) ? 'page' : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,243 @@
+---
+import { getStrings } from '../i18n';
+import type { Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = getStrings(lang);
+---
+
+<dialog id="search-modal" class="search-modal" aria-label={t.search.heading}>
+  <form class="search-form" method="dialog" autocomplete="off">
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 20 20"
+      class="search-modal-icon"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <circle cx="9" cy="9" r="6" />
+      <path d="m17 17-3.5-3.5" />
+    </svg>
+    <input
+      type="search"
+      id="search-modal-input"
+      class="search-modal-input"
+      placeholder={t.search.placeholder}
+      autocomplete="off"
+      data-pagefind-ignore="all"
+    />
+    <button type="button" data-search-close class="search-modal-close" aria-label={t.search.close}>
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 20 20"
+        width="20"
+        height="20"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+      >
+        <path d="M5 5l10 10M15 5L5 15" />
+      </svg>
+    </button>
+  </form>
+  <div id="search-modal-results" class="search-modal-results" data-pagefind-ignore="all">
+    <p class="search-empty">{t.search.empty}</p>
+  </div>
+</dialog>
+
+<script is:inline define:vars={{ noResultsLabel: t.search.noResults, emptyLabel: t.search.empty }}>
+  (function () {
+    const dialog = document.getElementById('search-modal');
+    const input = document.getElementById('search-modal-input');
+    const results = document.getElementById('search-modal-results');
+    if (!dialog || !input || !results) return;
+
+    let pagefindPromise = null;
+    function getPagefind() {
+      if (!pagefindPromise) {
+        pagefindPromise = import('/pagefind/pagefind.js').catch(() => null);
+      }
+      return pagefindPromise;
+    }
+
+    function open() {
+      if (typeof dialog.showModal === 'function') dialog.showModal();
+      else dialog.setAttribute('open', '');
+      requestAnimationFrame(() => input.focus());
+    }
+    function close() {
+      if (typeof dialog.close === 'function') dialog.close();
+      else dialog.removeAttribute('open');
+      input.value = '';
+      results.innerHTML = '<p class="search-empty">' + emptyLabel + '</p>';
+    }
+
+    document.addEventListener('click', (e) => {
+      const target = e.target;
+      if (!(target instanceof Element)) return;
+      if (target.closest('[data-search-trigger]')) {
+        e.preventDefault();
+        open();
+      } else if (target.closest('[data-search-close]')) {
+        e.preventDefault();
+        close();
+      } else if (target === dialog) {
+        // backdrop click
+        close();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        open();
+      }
+    });
+
+    let timer = null;
+    input.addEventListener('input', () => {
+      clearTimeout(timer);
+      const q = input.value.trim();
+      if (!q) {
+        results.innerHTML = '<p class="search-empty">' + emptyLabel + '</p>';
+        return;
+      }
+      timer = setTimeout(() => runSearch(q), 180);
+    });
+
+    async function runSearch(query) {
+      const pagefind = await getPagefind();
+      if (!pagefind) {
+        results.innerHTML = '<p class="search-empty">Search index not available. Run `npm run build` to generate it.</p>';
+        return;
+      }
+      try {
+        const search = await pagefind.search(query);
+        const data = await Promise.all(
+          search.results.slice(0, 10).map((r) => r.data())
+        );
+        if (data.length === 0) {
+          results.innerHTML = '<p class="search-empty">' + noResultsLabel + '</p>';
+          return;
+        }
+        results.innerHTML = data
+          .map((d) => {
+            const title = (d.meta && d.meta.title) || d.url;
+            return (
+              '<a class="search-result" href="' + d.url + '">' +
+              '<p class="search-result-title">' + escapeHtml(title) + '</p>' +
+              '<p class="search-result-excerpt">' + (d.excerpt || '') + '</p>' +
+              '</a>'
+            );
+          })
+          .join('');
+      } catch (err) {
+        results.innerHTML = '<p class="search-empty">' + noResultsLabel + '</p>';
+      }
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, (c) => (
+        { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+      ));
+    }
+  })();
+</script>
+
+<style is:global>
+  .search-modal {
+    border: none;
+    padding: 0;
+    background: var(--color-beige);
+    color: var(--color-ink);
+    width: min(640px, 92vw);
+    max-height: min(80vh, 720px);
+    border-radius: 0;
+    margin: 5vh auto auto;
+    box-shadow: 0 0 0 1px var(--color-rule);
+  }
+  .search-modal::backdrop {
+    background: rgba(26, 26, 26, 0.4);
+  }
+  .search-form {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--color-rule);
+  }
+  .search-modal-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--color-ink-muted);
+    flex-shrink: 0;
+  }
+  .search-modal-input {
+    flex: 1;
+    border: 0;
+    background: transparent;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-ink);
+    outline: none;
+  }
+  .search-modal-input::placeholder {
+    color: var(--color-ink-muted);
+  }
+  .search-modal-close {
+    background: transparent;
+    border: 0;
+    color: var(--color-ink-muted);
+    cursor: pointer;
+    padding: 0.25rem;
+    line-height: 0;
+    transition: color 0.15s;
+  }
+  .search-modal-close:hover {
+    color: var(--color-red);
+  }
+  .search-modal-results {
+    overflow-y: auto;
+    max-height: calc(min(80vh, 720px) - 4rem);
+    padding: 0.5rem 0;
+  }
+  .search-empty {
+    padding: 2rem 1.5rem;
+    text-align: center;
+    color: var(--color-ink-muted);
+    font-size: 0.9375rem;
+  }
+  .search-result {
+    display: block;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--color-rule);
+    transition: background 0.15s;
+  }
+  .search-result:last-child { border-bottom: 0; }
+  .search-result:hover { background: var(--color-beige-tint); }
+  .search-result-title {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin: 0 0 0.25rem;
+  }
+  .search-result-excerpt {
+    font-size: 0.875rem;
+    color: var(--color-ink-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .search-result-excerpt mark {
+    background: transparent;
+    color: var(--color-red);
+    font-weight: 500;
+  }
+</style>

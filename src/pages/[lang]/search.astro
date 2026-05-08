@@ -1,0 +1,60 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getStrings, LANGS } from '../../i18n';
+import type { Lang } from '../../i18n';
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+const t = getStrings(lang);
+---
+
+<Layout lang={lang} title={t.search.heading}>
+  {/* Pagefind ignores this page entirely — it's a no-JS fallback. */}
+  <section class="page-container py-20" data-pagefind-ignore="all">
+    <header class="mb-10 max-w-2xl">
+      <span aria-hidden="true" class="block w-[60px] h-[1.5px] bg-[color:var(--color-red)] mb-5"></span>
+      <p
+        class="mb-3"
+        style="font-family: var(--font-display); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--color-red); font-weight: 500;"
+      >
+        {t.search.heading}
+      </p>
+      <h1
+        class="mb-5"
+        style="font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 600; line-height: 1.04; letter-spacing: -0.02em;"
+      >
+        {t.search.heading}
+      </h1>
+    </header>
+
+    <div class="prose-column">
+      <p class="text-lg text-[color:var(--color-ink-muted)] mb-8">
+        {t.search.jsRequired}
+      </p>
+      <a
+        href={`/${lang}/apply`}
+        class="inline-flex items-center gap-2 border border-[color:var(--color-ink)] px-7 py-3 text-sm font-medium hover:border-[color:var(--color-red)] hover:text-[color:var(--color-red)] transition-colors"
+      >
+        <span>{t.country.back.replace(/^←\s*/, '')}</span>
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+</Layout>
+
+<script is:inline>
+  // If JS is on, redirect search-page visitors straight to the home with the modal opened.
+  // We don't need to wait for full page load — just immediately route home and let the
+  // modal trigger handle UX. But to be unobtrusive we just open the modal here.
+  document.addEventListener('DOMContentLoaded', () => {
+    const dialog = document.getElementById('search-modal');
+    if (dialog && typeof dialog.showModal === 'function') {
+      dialog.showModal();
+      const input = document.getElementById('search-modal-input');
+      if (input) input.focus();
+    }
+  });
+</script>

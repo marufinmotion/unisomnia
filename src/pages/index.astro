@@ -1,0 +1,35 @@
+---
+// Root redirect: respects saved language preference, falls back to /ru/.
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta name="description" content="Unisomnia — справочник для студентов из СНГ. За рубеж? Найди информацию здесь." />
+    <title>Unisomnia</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href="https://unisomnia.org/ru/" />
+    <meta http-equiv="refresh" content="0; url=/ru/" />
+    <script is:inline>
+      (function () {
+        try {
+          const saved = localStorage.getItem('unisomnia.lang');
+          const lang = saved === 'tg' ? 'tg' : 'ru';
+          location.replace('/' + lang + '/');
+        } catch (_) {
+          location.replace('/ru/');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <p style="font-family: system-ui; padding: 2rem;">
+      <a href="/ru/">Перейти на русский / Go to Russian</a>
+      &nbsp;·&nbsp;
+      <a href="/tg/">Тоҷикӣ / Tajik</a>
+    </p>
+  </body>
+</html>

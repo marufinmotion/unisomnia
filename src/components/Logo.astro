@@ -1,0 +1,37 @@
+---
+interface Props {
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+const { size = 'md', class: className = '' } = Astro.props;
+const heightClass = size === 'lg' ? 'h-9' : size === 'sm' ? 'h-5' : 'h-6';
+---
+
+{/*
+  Wordmark: a horizontal-crescent moon-U glyph + "nisomnia" set in Fraunces.
+  - Moon-U is a closed path with two cubic-bezier arcs forming a crescent
+    that opens upward (smile-shape). Tips taper subtly so it reads
+    hand-drawn, not purely geometric.
+  - Cap-height of the moon-U matches Fraunces capital U; it sits on the
+    same baseline (y=50) as the lowercase letters at font-size 46.
+  - currentColor lets the parent (Header / Footer) control the color
+    via CSS — beige on dark, ink on light.
+*/}
+<svg
+  viewBox="0 0 230 60"
+  class={`${heightClass} w-auto ${className}`}
+  role="img"
+  aria-label="Unisomnia"
+  fill="currentColor"
+>
+  <title>Unisomnia</title>
+  <path d="M5 18 C 5 61, 35 61, 35 18 L 33 20 C 33 52, 7 52, 7 20 Z" />
+  <text
+    x="40"
+    y="50"
+    font-family="Fraunces, Lora, Georgia, serif"
+    font-size="46"
+    font-weight="600"
+    letter-spacing="-0.6"
+  >nisomnia</text>
+</svg>

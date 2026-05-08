@@ -1,0 +1,38 @@
+---
+import { getStrings, TELEGRAM_BOT_URL, CONTACT_EMAIL } from '../i18n';
+import type { Lang } from '../i18n';
+import Logo from './Logo.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = getStrings(lang);
+---
+
+<footer class="mt-24 border-t border-[color:var(--color-rule)] py-10 text-sm text-[color:var(--color-ink-muted)]">
+  <div class="page-container flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+    <a
+      href={`/${lang}/`}
+      aria-label={t.siteName}
+      class="text-[color:var(--color-ink)] hover:text-[color:var(--color-red)] transition-colors"
+    >
+      <Logo size="sm" />
+    </a>
+
+    <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+      <a href={`/${lang}/about`} class="hover:text-[color:var(--color-ink)] transition-colors">{t.footer.about}</a>
+      <a
+        href={TELEGRAM_BOT_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:text-[color:var(--color-ink)] transition-colors"
+      >{t.footer.bot}</a>
+      <a href={`mailto:${CONTACT_EMAIL}`} class="hover:text-[color:var(--color-ink)] transition-colors">
+        {t.footer.contact}
+      </a>
+    </div>
+
+    <p class="text-xs">{t.footer.copy}</p>
+  </div>
+</footer>

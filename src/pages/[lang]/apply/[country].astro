@@ -1,0 +1,200 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getStrings, TELEGRAM_BOT_URL } from '../../../i18n';
+import type { Lang } from '../../../i18n';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const all = await getCollection('countries');
+  return all.map((entry) => {
+    const [lang, slug] = entry.id.split('/');
+    return {
+      params: { lang, country: slug },
+      props: { entry },
+    };
+  });
+}
+
+const { entry } = Astro.props;
+const lang = Astro.params.lang as Lang;
+const t = getStrings(lang);
+const isComingSoon = entry.data.status === 'coming-soon';
+const { Content } = await render(entry);
+
+const sectionMap = t.country.sections;
+const sectionOrder: (keyof typeof sectionMap)[] = [
+  'overview', 'universities', 'process', 'requirements',
+  'scholarships', 'cost', 'safety', 'visa', 'links',
+];
+
+const comingSoonBody = t.country.comingSoon.bodyTemplate.replace('{country}', entry.data.name);
+
+// Pagefind: skip indexing coming-soon pages (no real content)
+const bodyAttrs = isComingSoon ? { 'data-pagefind-ignore': 'all' } : {};
+---
+
+<Layout lang={lang} title={entry.data.name}>
+  <article class="page-container py-12 md:py-16" {...bodyAttrs}>
+    <a
+      href={`/${lang}/apply`}
+      class="inline-block mb-12 text-sm text-[color:var(--color-ink-muted)] hover:text-[color:var(--color-red)] transition-colors"
+    >
+      {t.country.back}
+    </a>
+
+    <header class="mb-16 flex flex-wrap items-end gap-6 border-b border-[color:var(--color-rule)] pb-12">
+      <span class="text-7xl leading-none">{entry.data.flag}</span>
+      <div>
+        <p class="eyebrow mb-2">{t.apply.eyebrow}</p>
+        <h1
+          style="font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 600; line-height: 1.04; letter-spacing: -0.02em;"
+        >{entry.data.name}</h1>
+      </div>
+      {isComingSoon && (
+        <span
+          class="ml-auto inline-block rounded-full bg-[color:var(--color-red)] text-[color:var(--color-beige)] px-3 py-1 leading-none"
+          style="font-family: var(--font-body); font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.14em; font-weight: 500;"
+        >
+          {t.apply.comingSoonBadge}
+        </span>
+      )}
+    </header>
+
+    <div class="grid grid-cols-1 gap-x-16 gap-y-12 lg:grid-cols-[minmax(0,1fr)_18rem]">
+      <div class="prose-column">
+        {isComingSoon ? (
+          <div>
+            <div class="border-y border-[color:var(--color-rule)] py-12 text-center">
+              <span aria-hidden="true" class="inline-block w-[60px] h-[1.5px] bg-[color:var(--color-red)] mb-5"></span>
+              <p
+                class="mb-3"
+                style="font-family: var(--font-display); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--color-red); font-weight: 500;"
+              >
+                {t.apply.comingSoonBadge}
+              </p>
+              <p class="text-lg leading-relaxed max-w-md mx-auto">{comingSoonBody}</p>
+            </div>
+            <div class="mt-10">
+              <a
+                href={`/${lang}/apply`}
+                class="inline-flex items-center gap-2 text-sm text-[color:var(--color-ink)] hover:text-[color:var(--color-red)] transition-colors"
+              >
+                <span aria-hidden="true">←</span>
+                <span>{t.country.comingSoon.cta}</span>
+              </a>
+            </div>
+          </div>
+        ) : (
+          <Fragment>
+            {/* Mobile: collapsible on-this-page nav */}
+            <nav aria-label={t.country.onThisPage} class="mb-12 lg:hidden">
+              <details class="border-y border-[color:var(--color-rule)] py-3">
+                <summary class="cursor-pointer text-sm font-medium">{t.country.onThisPage}</summary>
+                <ul class="mt-4 flex flex-col gap-2 text-sm">
+                  {sectionOrder.map((key, i) => (
+                    <li>
+                      <a
+                        href={`#${key}`}
+                        class="flex items-baseline gap-3 text-[color:var(--color-ink-muted)] hover:text-[color:var(--color-red)] transition-colors"
+                      >
+                        <span class="text-xs tabular-nums text-[color:var(--color-rule)]">
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
+                        <span>{sectionMap[key]}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            </nav>
+
+            <div class="country-prose">
+              <Content />
+            </div>
+
+            <p class="mt-16 text-xs italic text-[color:var(--color-ink-muted)]">
+              {t.country.timestamp}
+            </p>
+
+            <div class="mt-12 border-t border-[color:var(--color-rule)] pt-12">
+              <span aria-hidden="true" class="block w-[60px] h-[1.5px] bg-[color:var(--color-red)] mb-5"></span>
+              <p
+                class="mb-3"
+                style="font-family: var(--font-display); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--color-red); font-weight: 500;"
+              >
+                {t.country.botCta.title}
+              </p>
+              <p class="mb-7 text-lg leading-relaxed">{t.country.botCta.body}</p>
+              <a
+                href={TELEGRAM_BOT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 border border-[color:var(--color-ink)] px-7 py-3 text-sm font-medium hover:border-[color:var(--color-red)] hover:text-[color:var(--color-red)] transition-colors"
+              >
+                <span>{t.country.botCta.button}</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </Fragment>
+        )}
+      </div>
+
+      <aside class="lg:sticky lg:top-8 lg:self-start">
+        {/* Quick Facts */}
+        <div class="border-y border-[color:var(--color-rule)] py-6">
+          <p
+            class="mb-5"
+            style="font-family: var(--font-display); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--color-red); font-weight: 500;"
+          >
+            {t.country.quickFacts.title}
+          </p>
+          <dl class="space-y-4 text-sm">
+            <div class="flex justify-between gap-4">
+              <dt class="text-[color:var(--color-ink-muted)]">{t.country.quickFacts.capital}</dt>
+              <dd class="text-right">{entry.data.capital}</dd>
+            </div>
+            <div class="flex justify-between gap-4">
+              <dt class="text-[color:var(--color-ink-muted)]">{t.country.quickFacts.languages}</dt>
+              <dd class="text-right">{entry.data.languages.join(', ')}</dd>
+            </div>
+            <div class="flex justify-between gap-4">
+              <dt class="text-[color:var(--color-ink-muted)]">{t.country.quickFacts.currency}</dt>
+              <dd class="text-right tabular-nums">{entry.data.currency}</dd>
+            </div>
+            <div class="flex justify-between gap-4">
+              <dt class="text-[color:var(--color-ink-muted)]">{t.country.quickFacts.monthly}</dt>
+              <dd class="text-right tabular-nums">${entry.data.monthlyCostUSD}{t.country.quickFacts.usdSuffix}</dd>
+            </div>
+          </dl>
+        </div>
+
+        {/* Desktop on-this-page nav (only for live countries) */}
+        {!isComingSoon && (
+          <nav aria-label={t.country.onThisPage} class="mt-10 hidden lg:block">
+            <p
+              class="mb-4"
+              style="font-family: var(--font-display); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--color-red); font-weight: 500;"
+            >
+              {t.country.onThisPage}
+            </p>
+            <ul class="flex flex-col gap-2.5 text-sm">
+              {sectionOrder.map((key, i) => (
+                <li>
+                  <a
+                    href={`#${key}`}
+                    class="group flex items-baseline gap-3 text-[color:var(--color-ink-muted)] hover:text-[color:var(--color-red)] transition-colors"
+                  >
+                    <span class="tabular-nums text-xs text-[color:var(--color-rule)] group-hover:text-[color:var(--color-red)] transition-colors">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span>{sectionMap[key]}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
+      </aside>
+    </div>
+  </article>
+</Layout>
