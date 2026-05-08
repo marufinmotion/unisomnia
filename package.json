@@ -9,15 +9,22 @@
     "dev": "astro dev",
     "build": "astro build",
     "postbuild": "pagefind --site dist",
-    "preview": "astro preview",
-    "astro": "astro"
+    "preview": "npm run build && wrangler dev",
+    "astro": "astro",
+    "generate-types": "wrangler types",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^13.5.0",
     "@tailwindcss/vite": "^4.2.4",
     "astro": "^6.3.0",
     "tailwindcss": "^4.2.4"
   },
   "devDependencies": {
-    "pagefind": "^1.5.2"
+    "pagefind": "^1.5.2",
+    "wrangler": "^4.90.0"
+  },
+  "overrides": {
+    "vite": "^7"
   }
 }
