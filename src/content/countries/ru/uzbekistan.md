@@ -20,16 +20,25 @@ tag: "Без визы для граждан Таджикистана"
 
 ## Топовые университеты {#universities}
 
-- **Westminster International University in Tashkent (WIUT)** — Ташкент. Филиал University of Westminster (Лондон). Британский диплом. Бизнес, экономика, финансы, IT — всё на английском.
-- **Inha University in Tashkent** — Ташкент. Филиал корейского Inha University. IT, информатика, мультимедиа. Преподавание на английском.
-- **Branch of Lomonosov Moscow State University (МГУ) in Tashkent** — Ташкент. Российский диплом МГУ. Прикладная математика, экономика, психология, юриспруденция.
-- **Branch of Plekhanov Russian University of Economics in Tashkent** — Ташкент. Экономика, менеджмент, торговое дело.
-- **National University of Uzbekistan (NUUz)** — Ташкент. Старейший университет страны. Естественные науки, гуманитарные, журналистика.
-- **Tashkent State University of Economics (TSUE)** — Ташкент. Экономика, финансы.
-- **Tashkent University of Information Technologies (TUIT)** — Ташкент. CS, телекоммуникации, кибербезопасность.
-- **University of World Economy and Diplomacy (UWED)** — Ташкент. Международные отношения, дипломатия, международное право.
+Узбекистан быстро открывается: к национальным вузам добавились международные филиалы (Westminster, Inha, МГУ, Webster) с западными дипломами. Для студентов из Таджикистана это близко, доступно и без визы. Ниже — группировка по направлениям.
+
+### Универсальные топы
+- **National University of Uzbekistan (NUUz)** — Ташкент. Старейший вуз страны: естественные науки, гуманитарные, журналистика.
+- **Branch of Lomonosov Moscow State University (МГУ)** — Ташкент. Диплом МГУ: прикладная математика, экономика, психология, право.
 - **Samarkand State University** — Самарканд. Гуманитарные, востоковедение, история.
-- **Webster University in Tashkent** — американский филиал. Бизнес, психология, международные отношения.
+
+### Инженерия и технологии
+- **Inha University in Tashkent** — Ташкент. Филиал корейского Inha: IT, информатика, мультимедиа, на английском.
+- **Tashkent University of Information Technologies (TUIT)** — Ташкент. CS, телекоммуникации, кибербезопасность.
+
+### Бизнес и экономика
+- **Westminster International University (WIUT)** — Ташкент. Британский диплом: бизнес, экономика, финансы, IT.
+- **Tashkent State University of Economics (TSUE)** — Ташкент. Экономика, финансы.
+- **Branch of Plekhanov Russian University of Economics** — Ташкент. Экономика, менеджмент, торговое дело.
+
+### Гуманитарные науки и право
+- **University of World Economy and Diplomacy (UWED)** — Ташкент. Международные отношения, дипломатия, международное право.
+- **Webster University in Tashkent** — Ташкент. Американский филиал: психология, международные отношения, бизнес.
 
 ## Процесс подачи {#process}
 

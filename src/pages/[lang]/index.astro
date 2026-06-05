@@ -18,6 +18,9 @@ const headlineWords: string[][] = headlineLines.map((line) =>
   line.split(' ').filter((w) => w.length > 0),
 );
 let wordIndex = 0;
+
+// Subtitle words for the secondary word-by-word reveal.
+const subtitleWords: string[] = t.landing.subtitle.split(' ').filter((w) => w.length > 0);
 ---
 
 <Layout lang={lang} title={t.siteName} description={t.tagline}>
@@ -50,7 +53,17 @@ let wordIndex = 0;
           ))}
         </h1>
 
-        <p class="landing-subtitle">{t.landing.subtitle}</p>
+        <p class="landing-subtitle">
+          {subtitleWords.map((word, i) => (
+            <Fragment>
+              <span
+                class="landing-subtitle-word"
+                style={`--sub-word-delay: ${600 + i * 40}ms;`}
+              >{word}</span>
+              {' '}
+            </Fragment>
+          ))}
+        </p>
 
         <div class="landing-cta-wrap">
           <a

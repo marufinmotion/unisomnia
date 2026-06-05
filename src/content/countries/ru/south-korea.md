@@ -22,16 +22,23 @@ tag: "GKS · английский в магистратуре"
 
 ## Топовые университеты {#universities}
 
-- **Seoul National University (SNU, 서울대)** — Сеул. Главный национальный университет. Все направления, особенно гуманитарные, естественные науки, медицина.
-- **Korea Advanced Institute of Science and Technology (KAIST)** — Тэджон. Лучший STEM-университет страны, полностью англоязычный. CS, инженерия, бизнес (KAIST College of Business).
-- **POSTECH (Pohang University of Science and Technology)** — Поханг. Малый исследовательский институт, физика, материаловедение, биология, CS.
-- **Yonsei University (연세대)** — Сеул. Сильные программы по бизнесу (Yonsei School of Business), международным отношениям (GSIS), медицине.
-- **Korea University (고려대)** — Сеул. Право, бизнес (Korea University Business School), международные отношения.
-- **Sungkyunkwan University (SKKU, 성균관대)** — Сеул и Сувон. Финансовая поддержка от Samsung. Бизнес, инженерия, медицина.
-- **Hanyang University (한양대)** — Сеул и Ансан. Инженерия, архитектура, медицина.
-- **UNIST (Ulsan National Institute of Science and Technology)** — Ульсан. Англоязычный исследовательский институт. Энергетика, материалы, биотех.
-- **Ewha Womans University** — Сеул. Женский университет с сильной репутацией. Гуманитарные, бизнес, дизайн.
+Южная Корея сильна в STEM (KAIST, POSTECH на мировом уровне), но «SKY» — Seoul National, Korea и Yonsei — остаются самыми престижными по широкому спектру. Ниже — группировка по направлениям.
+
+### Универсальные топы
+- **Seoul National University (SNU, 서울대)** — Сеул. Главный национальный университет, силён по всем направлениям.
+- **Yonsei University (연세대)** — Сеул. Бизнес, международные отношения (GSIS), медицина.
+- **Korea University (고려대)** — Сеул. Право, бизнес, международные отношения.
+
+### Инженерия и технологии
+- **Korea Advanced Institute of Science and Technology (KAIST)** — Тэджон. Лучший STEM-вуз страны, полностью англоязычный.
+- **POSTECH (Pohang University of Science and Technology)** — Поханг. Малый исследовательский институт: физика, материаловедение, CS.
+- **UNIST (Ulsan National Institute of Science and Technology)** — Ульсан. Англоязычный, энергетика, материалы, биотех.
+- **Hanyang University (한양대)** — Сеул и Ансан. Инженерия, архитектура.
+
+### Бизнес и экономика
+- **Sungkyunkwan University (SKKU, 성균관대)** — Сеул и Сувон. Поддержка Samsung; бизнес, инженерия, медицина.
 - **Sogang University** — Сеул. Иезуитский, сильны бизнес, экономика, коммуникации.
+- **Ewha Womans University** — Сеул. Престижный женский университет: бизнес, дизайн, гуманитарные.
 
 ## Процесс подачи {#process}
 

@@ -24,18 +24,29 @@ tag: "Англисӣ · NYU Abu Dhabi"
 
 ## Донишгоҳҳои беҳтарин {#universities}
 
-- **NYU Abu Dhabi** — Абу-Даби. Кампуси байналмилалии NYU. Хеле селективӣ, серсамт, бо англисӣ. ~3–4%-и довталабонро қабул мекунанд.
-- **Khalifa University** — Абу-Даби. Давлатӣ, муҳандисӣ, илм, нафту газ, ҳушмандии сунъӣ (MBZUAI ва Khalifa дар шарокат).
-- **United Arab Emirates University (UAEU)** — Ал-Айн. Қадимтарин давлатӣ, серсамт.
-- **American University of Sharjah (AUS)** — Шорҷа. Хусусӣ, тиҷорат, муҳандисӣ, санъат, меъморӣ.
-- **Zayed University** — Дубай ва Абу-Даби. Давлатӣ, тиҷорат ва медиа.
-- **University of Birmingham Dubai** — Дубай. Кампуси донишгоҳи британӣ.
-- **Heriot-Watt University Dubai** — Дубай. Кампуси донишгоҳи шотландӣ, муҳандисӣ ва тиҷорат.
-- **American University in Dubai (AUD)** — Дубай. Хусусӣ, тиҷорат, муҳандисӣ, медиа.
-- **Mohammed Bin Zayed University of Artificial Intelligence (MBZUAI)** — Абу-Даби. Комилан оид ба ИИ, барои магистратура ва PhD. Пӯшиши пурра барои қабулшудагон.
-- **Mohammed bin Rashid University of Medicine and Health Sciences (MBRU)** — Дубай. Тиб ва дандонпизишкӣ.
-- **Higher Colleges of Technology (HCT)** — кампусҳо дар тамоми аморатҳо. Барномаҳои амалӣ.
-- **Sorbonne University Abu Dhabi** — кампуси фаронсавӣ, гуманитарӣ ва ҳуқуқ.
+Мактаби олии АМА омезиши кампусҳои байналмилалӣ (NYU, Birmingham, Sorbonne) ва вузҳои қавии худист. Таълим қариб ҳама ҷо бо англисӣ. Дар поён — гурӯҳбандӣ аз рӯи самтҳо.
+
+### Топҳои умумӣ
+- **NYU Abu Dhabi** — Абу-Даби. Кампуси байналмилалии NYU, хеле селективӣ (~3–4%), серсамт, бо англисӣ.
+- **University of Birmingham Dubai** — Дубай. Кампуси пурраи донишгоҳи британӣ, профили васеъ.
+
+### Муҳандисӣ ва технология
+- **Khalifa University** — Абу-Даби. Муҳандисӣ, илм, нафту газ; беҳтарин вузи техникии давлатӣ.
+- **Mohammed Bin Zayed University of Artificial Intelligence (MBZUAI)** — Абу-Даби. Комилан оид ба ИИ, магистратура ва PhD, пӯшиши пурра.
+- **Heriot-Watt University Dubai** — Дубай. Кампуси донишгоҳи шотландӣ, муҳандисӣ ва илмҳои амалӣ.
+- **Higher Colleges of Technology (HCT)** — кампусҳо дар тамоми аморатҳо. Барномаҳои техникии амалӣ.
+
+### Соҳибкорӣ ва иқтисод
+- **American University of Sharjah (AUS)** — Шорҷа. Хусусӣ, тиҷорат, муҳандисӣ, меъморӣ.
+- **American University in Dubai (AUD)** — Дубай. Хусусӣ, тиҷорат, медиа, муҳандисӣ.
+
+### Тиб ва илмҳои ҳаёт
+- **Mohammed bin Rashid University (MBRU)** — Дубай. Тиб ва дандонпизишкӣ.
+- **United Arab Emirates University (UAEU)** — Ал-Айн. Қадимтарин вузи давлатӣ, илмҳои табиатшиносӣ ва кишоварзӣ.
+
+### Илмҳои инсондӯстона ва ҳуқуқ
+- **Sorbonne University Abu Dhabi** — Абу-Даби. Кампуси фаронсавӣ, гуманитарӣ ва ҳуқуқ.
+- **Zayed University** — Дубай ва Абу-Даби. Гуманитарӣ, медиа, маориф.
 
 ## Раванди дархост {#process}
 

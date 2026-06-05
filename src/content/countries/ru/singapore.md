@@ -22,14 +22,21 @@ tag: "Английский · NUS, NTU"
 
 ## Топовые университеты {#universities}
 
-- **National University of Singapore (NUS)** — Сингапур. Старейший и крупнейший. Все направления, особенно бизнес (NUS Business School), медицина (Duke-NUS, Yong Loo Lin), инженерия, CS, право.
-- **Nanyang Technological University (NTU)** — Сингапур. Сильнейшая инженерия, материаловедение, CS, бизнес (Nanyang Business School), медицина (Lee Kong Chian).
-- **Singapore Management University (SMU)** — Сингапур. Бизнес и общественные науки. Американская модель преподавания. Право, экономика, accounting.
-- **Singapore University of Technology and Design (SUTD)** — Сингапур. Партнёрство с MIT. Дизайн, архитектура, инженерия с упором на междисциплинарность.
-- **Singapore Institute of Technology (SIT)** — Сингапур. Прикладная инженерия и здоровье. Сотрудничество с зарубежными вузами (Newcastle, Glasgow и др.).
-- **Singapore University of Social Sciences (SUSS)** — Сингапур. Социальные науки, бизнес.
-- **Yale-NUS College** — Сингапур. Liberal arts college (закрывается к 2025; новый бакалавриат NUS College перенял традицию).
+Сингапур — компактная, но исключительно сильная система: NUS и NTU стабильно в мировом топ-20. Преподавание везде на английском. Ниже — группировка по направлениям.
+
+### Универсальные топы
+- **National University of Singapore (NUS)** — Сингапур. Старейший и крупнейший, силён по всем направлениям.
+- **Nanyang Technological University (NTU)** — Сингапур. Инженерия, материаловедение, CS, бизнес, медицина.
+- **Yale-NUS College** — Сингапур. Liberal arts (закрывается к 2025; традицию перенял NUS College).
+
+### Инженерия и технологии
+- **Singapore University of Technology and Design (SUTD)** — Сингапур. Партнёрство с MIT, дизайн и инженерия.
+- **Singapore Institute of Technology (SIT)** — Сингапур. Прикладная инженерия и здоровье, партнёрства с Newcastle, Glasgow.
+
+### Бизнес и экономика
+- **Singapore Management University (SMU)** — Сингапур. Американская модель: бизнес, право, экономика, accounting.
 - **INSEAD Asia Campus** — Сингапур. Глобальная бизнес-школа, MBA, EMBA.
+- **Singapore University of Social Sciences (SUSS)** — Сингапур. Социальные науки, бизнес.
 
 ## Процесс подачи {#process}
 

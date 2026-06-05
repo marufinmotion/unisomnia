@@ -24,14 +24,21 @@ tag: "Англисӣ · NUS, NTU"
 
 ## Донишгоҳҳои беҳтарин {#universities}
 
-- **National University of Singapore (NUS)** — Сингапур. Қадимтарин ва бузургтарин. Ҳамаи самтҳо, махсусан тиҷорат (NUS Business School), тиб (Duke-NUS, Yong Loo Lin), муҳандисӣ, CS, ҳуқуқ.
-- **Nanyang Technological University (NTU)** — Сингапур. Муҳандисии қавитарин, материалшиносӣ, CS, тиҷорат (Nanyang Business School), тиб (Lee Kong Chian).
-- **Singapore Management University (SMU)** — Сингапур. Тиҷорат ва илмҳои ҷамъиятӣ. Модели америкоии таълим. Ҳуқуқ, иқтисод, accounting.
-- **Singapore University of Technology and Design (SUTD)** — Сингапур. Шарокат бо MIT. Дизайн, меъморӣ, муҳандисӣ бо такя ба байнисамтгузарӣ.
-- **Singapore Institute of Technology (SIT)** — Сингапур. Муҳандисӣ ва саломатии амалӣ. Ҳамкорӣ бо донишгоҳҳои хориҷӣ (Newcastle, Glasgow ва ғ.).
-- **Singapore University of Social Sciences (SUSS)** — Сингапур. Илмҳои ҷамъиятӣ, тиҷорат.
-- **Yale-NUS College** — Сингапур. Коллеҷи liberal arts (то соли 2025 баста мешавад; бакалавриати нави NUS College анъанаро мегирад).
+Сингапур низоми паймуда вале фавқулода қавӣ дорад: NUS ва NTU мунтазам дар топ-20-и ҷаҳон. Таълим ҳама ҷо бо англисӣ. Дар поён — гурӯҳбандӣ аз рӯи самтҳо.
+
+### Топҳои умумӣ
+- **National University of Singapore (NUS)** — Сингапур. Қадимтарин ва бузургтарин, дар ҳама самтҳо қавӣ.
+- **Nanyang Technological University (NTU)** — Сингапур. Муҳандисӣ, материалшиносӣ, CS, тиҷорат, тиб.
+- **Yale-NUS College** — Сингапур. Liberal arts (то соли 2025 баста мешавад; анъанаро NUS College мегирад).
+
+### Муҳандисӣ ва технология
+- **Singapore University of Technology and Design (SUTD)** — Сингапур. Шарокат бо MIT, дизайн ва муҳандисӣ.
+- **Singapore Institute of Technology (SIT)** — Сингапур. Муҳандисӣ ва саломатии амалӣ, шарокат бо Newcastle, Glasgow.
+
+### Соҳибкорӣ ва иқтисод
+- **Singapore Management University (SMU)** — Сингапур. Модели америкоӣ: тиҷорат, ҳуқуқ, иқтисод, accounting.
 - **INSEAD Asia Campus** — Сингапур. Мактаби тиҷорати ҷаҳонӣ, MBA, EMBA.
+- **Singapore University of Social Sciences (SUSS)** — Сингапур. Илмҳои ҷамъиятӣ, тиҷорат.
 
 ## Раванди дархост {#process}
 

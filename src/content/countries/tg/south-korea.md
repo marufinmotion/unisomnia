@@ -24,16 +24,23 @@ tag: "GKS · англисӣ дар магистратура"
 
 ## Донишгоҳҳои беҳтарин {#universities}
 
-- **Seoul National University (SNU, 서울대)** — Сеул. Донишгоҳи асосии миллӣ. Ҳамаи самтҳо, махсусан гуманитарӣ, табиатшиносӣ, тиб.
-- **Korea Advanced Institute of Science and Technology (KAIST)** — Тэҷон. Беҳтарин донишгоҳи STEM-и кишвар, комилан англисизабон. CS, муҳандисӣ, тиҷорат (KAIST College of Business).
-- **POSTECH (Pohang University of Science and Technology)** — Поханг. Институти хурди тадқиқотӣ, физика, материалшиносӣ, биология, CS.
-- **Yonsei University (연세대)** — Сеул. Барномаҳои қавӣ оид ба тиҷорат (Yonsei School of Business), муносибатҳои байналмилалӣ (GSIS), тиб.
-- **Korea University (고려대)** — Сеул. Ҳуқуқ, тиҷорат (Korea University Business School), муносибатҳои байналмилалӣ.
-- **Sungkyunkwan University (SKKU, 성균관대)** — Сеул ва Сувон. Дастгирии молиявӣ аз Samsung. Тиҷорат, муҳандисӣ, тиб.
-- **Hanyang University (한양대)** — Сеул ва Ансан. Муҳандисӣ, меъморӣ, тиб.
-- **UNIST (Ulsan National Institute of Science and Technology)** — Улсан. Институти тадқиқотии англисизабон. Энергетика, материалҳо, биотех.
-- **Ewha Womans University** — Сеул. Донишгоҳи занона бо обрӯи қавӣ. Гуманитарӣ, тиҷорат, дизайн.
+Кореяи Ҷанубӣ дар STEM қавӣ аст (KAIST, POSTECH дар сатҳи ҷаҳонӣ), аммо «SKY» — Seoul National, Korea ва Yonsei — обрӯмандтарин боқӣ мемонанд. Дар поён — гурӯҳбандӣ аз рӯи самтҳо.
+
+### Топҳои умумӣ
+- **Seoul National University (SNU, 서울대)** — Сеул. Донишгоҳи асосии миллӣ, дар ҳама самтҳо қавӣ.
+- **Yonsei University (연세대)** — Сеул. Тиҷорат, муносибатҳои байналмилалӣ (GSIS), тиб.
+- **Korea University (고려대)** — Сеул. Ҳуқуқ, тиҷорат, муносибатҳои байналмилалӣ.
+
+### Муҳандисӣ ва технология
+- **Korea Advanced Institute of Science and Technology (KAIST)** — Тэҷон. Беҳтарин вузи STEM-и кишвар, комилан англисизабон.
+- **POSTECH (Pohang University of Science and Technology)** — Поханг. Институти хурди тадқиқотӣ: физика, материалшиносӣ, CS.
+- **UNIST (Ulsan National Institute of Science and Technology)** — Улсан. Англисизабон, энергетика, материалҳо, биотех.
+- **Hanyang University (한양대)** — Сеул ва Ансан. Муҳандисӣ, меъморӣ.
+
+### Соҳибкорӣ ва иқтисод
+- **Sungkyunkwan University (SKKU, 성균관대)** — Сеул ва Сувон. Дастгирии Samsung; тиҷорат, муҳандисӣ, тиб.
 - **Sogang University** — Сеул. Иезуит, тиҷорат, иқтисод, коммуникатсия қавӣ.
+- **Ewha Womans University** — Сеул. Донишгоҳи занонаи обрӯманд: тиҷорат, дизайн, гуманитарӣ.
 
 ## Раванди дархост {#process}
 
