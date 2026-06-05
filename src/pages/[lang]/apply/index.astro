@@ -1,6 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { getStrings, LANGS } from '../../../i18n';
+import CountrySilhouette from '../../../components/CountrySilhouette.astro';
+import { getStrings, LANGS, COUNTRY_ISO } from '../../../i18n';
 import type { Lang } from '../../../i18n';
 import { getCollection } from 'astro:content';
 
@@ -17,11 +18,9 @@ const countries = all
   .map((entry) => ({
     slug: entry.data.slug,
     name: entry.data.name,
-    flag: entry.data.flag,
+    iso: COUNTRY_ISO[entry.data.slug] ?? 'xx',
     tag: entry.data.tag ?? '',
-    monthly: entry.data.monthlyCostUSD,
     order: entry.data.order,
-    status: entry.data.status,
   }))
   .sort((a, b) => a.order - b.order);
 ---
@@ -59,54 +58,33 @@ const countries = all
     </div>
 
     <ul id="country-grid" class="grid grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-      {countries.map((c, i) => {
-        const isComingSoon = c.status === 'coming-soon';
-        return (
-          <li data-country-name={c.name.toLowerCase()}>
-            <a
-              href={`/${lang}/apply/${c.slug}`}
-              class={
-                isComingSoon
-                  ? 'block border-t border-[color:var(--color-rule)] pt-6 cursor-default relative'
-                  : 'group block border-t border-[color:var(--color-rule)] pt-6'
-              }
-              aria-label={isComingSoon ? `${c.name} — ${t.apply.comingSoonBadge}` : c.name}
-            >
-              {isComingSoon && (
+      {countries.map((c, i) => (
+        <li data-country-name={c.name.toLowerCase()}>
+          <a
+            href={`/${lang}/apply/${c.slug}`}
+            class="country-card group relative block border-t border-[color:var(--color-rule)] pt-6 cursor-pointer overflow-hidden"
+            aria-label={c.name}
+          >
+            <CountrySilhouette slug={c.slug} class="country-card-silhouette" />
+            <div class="relative z-10">
+              <div class="mb-6 flex items-center justify-between">
+                <span class={`fi fi-${c.iso} country-card-flag`} aria-hidden="true"></span>
                 <span
-                  class="absolute right-0 top-6 inline-block rounded-full bg-[color:var(--color-red)] text-[color:var(--color-beige)] px-3 py-1 leading-none"
-                  style="font-family: var(--font-body); font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.14em; font-weight: 500;"
-                >
-                  {t.apply.comingSoonBadge}
-                </span>
-              )}
-              <div class={isComingSoon ? 'opacity-60' : ''}>
-                <div class="mb-6 flex items-baseline justify-between">
-                  <span class="text-5xl leading-none">{c.flag}</span>
-                  <span
-                    class="text-[color:var(--color-ink-muted)]"
-                    style="font-family: var(--font-display); font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase;"
-                  >{String(i + 1).padStart(2, '0')}</span>
-                </div>
-                <h2
-                  class={
-                    isComingSoon
-                      ? 'mb-2'
-                      : 'mb-2 group-hover:[text-decoration:underline] group-hover:[text-decoration-color:var(--color-red)] group-hover:[text-decoration-thickness:1.5px] group-hover:underline-offset-[6px]'
-                  }
-                  style="font-family: var(--font-display); font-size: 1.625rem; font-weight: 600; letter-spacing: -0.01em;"
-                >
-                  {c.name}
-                </h2>
-                {c.tag && <p class="text-sm text-[color:var(--color-ink-muted)]">{c.tag}</p>}
-                <p class="mt-3 text-xs text-[color:var(--color-ink-muted)] tabular-nums">
-                  ${c.monthly}{t.apply.perMonth}
-                </p>
+                  class="text-[color:var(--color-ink-muted)]"
+                  style="font-family: var(--font-display); font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase;"
+                >{String(i + 1).padStart(2, '0')}</span>
               </div>
-            </a>
-          </li>
-        );
-      })}
+              <h2
+                class="mb-2 group-hover:[text-decoration:underline] group-hover:[text-decoration-color:var(--color-red)] group-hover:[text-decoration-thickness:1.5px] group-hover:underline-offset-[6px]"
+                style="font-family: var(--font-display); font-size: 1.625rem; font-weight: 600; letter-spacing: -0.01em;"
+              >
+                {c.name}
+              </h2>
+              {c.tag && <p class="text-sm text-[color:var(--color-ink-muted)]">{c.tag}</p>}
+            </div>
+          </a>
+        </li>
+      ))}
     </ul>
 
     <p id="country-empty" hidden class="mt-16 text-center text-[color:var(--color-ink-muted)]">
@@ -132,6 +110,28 @@ const countries = all
         }
         empty.hidden = shown !== 0;
       });
+    })();
+
+    // Stagger entrance: first visit only (sessionStorage flag).
+    // Per spec: 30ms inter-card delay, 250ms transition, total ~670ms.
+    // Skipped entirely under prefers-reduced-motion.
+    (function () {
+      const grid = document.getElementById('country-grid');
+      if (!grid) return;
+      const prefersReduced =
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) return;
+
+      let seen = false;
+      try { seen = sessionStorage.getItem('unisomnia.catalog.seen') === '1'; } catch (_) {}
+      if (seen) return;
+
+      const cards = Array.from(grid.children);
+      cards.forEach((li, i) => {
+        li.style.setProperty('--stagger-delay', (i * 30) + 'ms');
+      });
+      grid.classList.add('stagger');
+      try { sessionStorage.setItem('unisomnia.catalog.seen', '1'); } catch (_) {}
     })();
   </script>
 </Layout>

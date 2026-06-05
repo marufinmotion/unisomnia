@@ -52,7 +52,11 @@ const t = getStrings(lang);
   </div>
 </dialog>
 
-<script is:inline define:vars={{ noResultsLabel: t.search.noResults, emptyLabel: t.search.empty }}>
+<script is:inline define:vars={{
+  emptyLabel: t.search.empty,
+  noResultsHeadline: t.search.noResultsHeadline,
+  noResultsHint: t.search.noResultsHint,
+}}>
   (function () {
     const dialog = document.getElementById('search-modal');
     const input = document.getElementById('search-modal-input');
@@ -67,6 +71,19 @@ const t = getStrings(lang);
       return pagefindPromise;
     }
 
+    function showEmptyPrompt() {
+      results.innerHTML = '<p class="search-empty">' + emptyLabel + '</p>';
+    }
+
+    function showNoResults(query) {
+      const headline = noResultsHeadline.replace('{query}', escapeHtml(query));
+      results.innerHTML =
+        '<div class="search-no-results">' +
+        '<p class="search-no-results-headline">' + headline + '</p>' +
+        '<p class="search-no-results-hint">' + escapeHtml(noResultsHint) + '</p>' +
+        '</div>';
+    }
+
     function open() {
       if (typeof dialog.showModal === 'function') dialog.showModal();
       else dialog.setAttribute('open', '');
@@ -76,7 +93,7 @@ const t = getStrings(lang);
       if (typeof dialog.close === 'function') dialog.close();
       else dialog.removeAttribute('open');
       input.value = '';
-      results.innerHTML = '<p class="search-empty">' + emptyLabel + '</p>';
+      showEmptyPrompt();
     }
 
     document.addEventListener('click', (e) => {
@@ -102,11 +119,14 @@ const t = getStrings(lang);
     });
 
     let timer = null;
+    let activeQuery = '';
     input.addEventListener('input', () => {
       clearTimeout(timer);
       const q = input.value.trim();
+      activeQuery = q;
       if (!q) {
-        results.innerHTML = '<p class="search-empty">' + emptyLabel + '</p>';
+        // Cleared input: return to the empty-prompt state, not no-results.
+        showEmptyPrompt();
         return;
       }
       timer = setTimeout(() => runSearch(q), 180);
@@ -123,8 +143,10 @@ const t = getStrings(lang);
         const data = await Promise.all(
           search.results.slice(0, 10).map((r) => r.data())
         );
+        // Discard stale results if the user kept typing.
+        if (activeQuery !== query) return;
         if (data.length === 0) {
-          results.innerHTML = '<p class="search-empty">' + noResultsLabel + '</p>';
+          showNoResults(query);
           return;
         }
         results.innerHTML = data
@@ -139,7 +161,7 @@ const t = getStrings(lang);
           })
           .join('');
       } catch (err) {
-        results.innerHTML = '<p class="search-empty">' + noResultsLabel + '</p>';
+        showNoResults(query);
       }
     }
 
@@ -213,6 +235,27 @@ const t = getStrings(lang);
     text-align: center;
     color: var(--color-ink-muted);
     font-size: 0.9375rem;
+  }
+  .search-no-results {
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  .search-no-results-headline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.375rem;
+    color: var(--color-ink);
+    margin: 0 0 0.75rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+  .search-no-results-hint {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-ink-muted);
+    margin: 0;
+    line-height: 1.5;
   }
   .search-result {
     display: block;

@@ -17,7 +17,6 @@ const countries = defineCollection({
     monthlyCostUSD: z.number().int().positive(),
     order: z.number().int(),
     tag: z.string().optional(),
-    status: z.enum(['live', 'coming-soon']).default('live'),
   }),
 });
 

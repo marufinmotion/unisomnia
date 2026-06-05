@@ -8,26 +8,31 @@ const heightClass = size === 'lg' ? 'h-9' : size === 'sm' ? 'h-5' : 'h-6';
 ---
 
 {/*
-  Wordmark: a horizontal-crescent moon-U glyph + "nisomnia" set in Fraunces.
-  - Moon-U is a closed path with two cubic-bezier arcs forming a crescent
-    that opens upward (smile-shape). Tips taper subtly so it reads
-    hand-drawn, not purely geometric.
-  - Cap-height of the moon-U matches Fraunces capital U; it sits on the
-    same baseline (y=50) as the lowercase letters at font-size 46.
-  - currentColor lets the parent (Header / Footer) control the color
-    via CSS — beige on dark, ink on light.
+  Wordmark: a crescent moon-U glyph + "nisomnia" set in Fraunces.
+
+  Geometry (viewBox 0 0 260 66):
+  - 16px+ padding on all four sides past the outermost letterforms.
+  - Moon-U is a closed path: an elongated U-shape (outer arc),
+    a thinner inner arc, joined by softly rounded tips (quadratic
+    micro-curves rather than sharp corners). Crescent thickness is
+    near-even — only a subtle taper at the tips so it reads hand-drawn.
+  - Moon-U cap-height = letter ascender-height of "i" (top y=17, baseline y=50).
+  - Kerning gap between moon-U right tip (x=46) and "n" start (x=50)
+    is 4px ≈ 12% of cap-height — tight, not touching.
+
+  currentColor lets parents tint the logo via CSS.
 */}
 <svg
-  viewBox="0 0 230 60"
+  viewBox="0 0 260 66"
   class={`${heightClass} w-auto ${className}`}
   role="img"
   aria-label="Unisomnia"
   fill="currentColor"
 >
   <title>Unisomnia</title>
-  <path d="M5 18 C 5 61, 35 61, 35 18 L 33 20 C 33 52, 7 52, 7 20 Z" />
+  <path d="M 16 17 C 16 60, 46 60, 46 17 Q 45 14.5, 43 17 C 43 53, 19 53, 19 17 Q 17 14.5, 16 17 Z" />
   <text
-    x="40"
+    x="50"
     y="50"
     font-family="Fraunces, Lora, Georgia, serif"
     font-size="46"

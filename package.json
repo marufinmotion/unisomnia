@@ -16,8 +16,10 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "^13.5.0",
+    "@astrojs/sitemap": "^3.7.3",
     "@tailwindcss/vite": "^4.2.4",
     "astro": "^6.3.0",
+    "flag-icons": "^7.5.0",
     "tailwindcss": "^4.2.4"
   },
   "devDependencies": {

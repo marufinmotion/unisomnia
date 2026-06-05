@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Unisomnia logo preview — three sizes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@400;500&display=swap">
+  <style>
+    :root {
+      --beige: #F4EDE0;
+      --ink: #1A1A1A;
+      --red: #C8362F;
+      --rule: rgba(26, 26, 26, 0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: var(--beige);
+      color: var(--ink);
+      font-family: 'Inter', system-ui, sans-serif;
+      padding: 48px 32px;
+      line-height: 1.5;
+    }
+    h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 600;
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    p.lede { color: rgba(26,26,26,0.6); margin-bottom: 48px; max-width: 60ch; }
+
+    .row {
+      border-top: 1px solid var(--rule);
+      padding: 32px 0 40px;
+      display: grid;
+      grid-template-columns: 200px 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+    .row + .row { padding-top: 32px; }
+
+    .label {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--red);
+      font-weight: 500;
+    }
+    .label span { display: block; color: rgba(26,26,26,0.6); margin-top: 6px; font-family: 'Inter'; font-size: 12px; letter-spacing: 0; text-transform: none; }
+
+    .swatch-dark, .swatch-light {
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-radius: 2px;
+      min-height: 96px;
+    }
+    .swatch-dark { background: var(--beige); border: 1px solid var(--rule); }
+    .swatch-light { background: var(--ink); }
+
+    /* Logo sizes: spec-required render heights. */
+    .h24 svg { height: 24px; width: auto; display: block; }
+    .h32 svg { height: 32px; width: auto; display: block; }
+    .h64 svg { height: 64px; width: auto; display: block; }
+
+    .swatch-dark svg { fill: var(--ink); }
+    .swatch-light svg { fill: var(--beige); }
+
+    footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--rule);
+      color: rgba(26,26,26,0.6);
+      font-size: 13px;
+    }
+    code { font-family: 'SF Mono', Menlo, monospace; background: rgba(26,26,26,0.06); padding: 2px 6px; border-radius: 2px; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <h1>Unisomnia logo — preview</h1>
+  <p class="lede">
+    Three render sizes per spec (24px tall = header, 32px tall = footer, 64px tall = social / OG).
+    Each row shows the logo on the beige page background (left) and on the dark ink background (right, using the light variant).
+  </p>
+
+  <!-- 24px (header) -->
+  <div class="row">
+    <p class="label">24px tall<span>Header use</span></p>
+    <div class="swatch-dark h24">
+      <svg viewBox="0 0 260 66" role="img" aria-label="Unisomnia">
+        <title>Unisomnia</title>
+        <path d="M 16 17 C 16 60, 46 60, 46 17 Q 45 14.5, 43 17 C 43 53, 19 53, 19 17 Q 17 14.5, 16 17 Z"/>
+        <text x="50" y="50" font-family="Fraunces, Lora, Georgia, serif" font-size="46" font-weight="600" letter-spacing="-0.6">nisomnia</text>
+      </svg>
+    </div>
+    <div class="swatch-light h24">
+      <svg viewBox="0 0 260 66" role="img" aria-label="Unisomnia">
+        <title>Unisomnia</title>
+        <path d="M 16 17 C 16 60, 46 60, 46 17 Q 45 14.5, 43 17 C 43 53, 19 53, 19 17 Q 17 14.5, 16 17 Z"/>
+        <text x="50" y="50" font-family="Fraunces, Lora, Georgia, serif" font-size="46" font-weight="600" letter-spacing="-0.6">nisomnia</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- 32px (footer if used larger) -->
+  <div class="row">
+    <p class="label">32px tall<span>Footer / larger contexts</span></p>
+    <div class="swatch-dark h32">
+      <svg viewBox="0 0 260 66" role="img" aria-label="Unisomnia">
+        <title>Unisomnia</title>
+        <path d="M 16 17 C 16 60, 46 60, 46 17 Q 45 14.5, 43 17 C 43 53, 19 53, 19 17 Q 17 14.5, 16 17 Z"/>
+        <text x="50" y="50" font-family="Fraunces, Lora, Georgia, serif" font-size="46" font-weight="600" letter-spacing="-0.6">nisomnia</text>
+      </svg>
+    </div>
+    <div class="swatch-light h32">
+      <svg viewBox="0 0 260 66" role="img" aria-label="Unisomnia">
+        <title>Unisomnia</title>
+        <path d="M 16 17 C 16 60, 46 60, 46 17 Q 45 14.5, 43 17 C 43 53, 19 53, 19 17 Q 17 14.5, 16 17 Z"/>
+        <text x="50" y="50" font-family="Fraunces, Lora, Georgia, serif" font-size="46" font-weight="600" letter-spacing="-0.6">nisomnia</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- 64px (social / OG) -->
+  <div class="row">
+    <p class="label">64px tall<span>Social / OG image use</span></p>
+    <div class="swatch-dark h64">
+      <svg viewBox="0 0 260 66" role="img" aria-label="Unisomnia">
+        <title>Unisomnia</title>
+        <path d="M 16 17 C 16 60, 46 60, 46 17 Q 45 14.5, 43 17 C 43 53, 19 53, 19 17 Q 17 14.5, 16 17 Z"/>
+        <text x="50" y="50" font-family="Fraunces, Lora, Georgia, serif" font-size="46" font-weight="600" letter-spacing="-0.6">nisomnia</text>
+      </svg>
+    </div>
+    <div class="swatch-light h64">
+      <svg viewBox="0 0 260 66" role="img" aria-label="Unisomnia">
+        <title>Unisomnia</title>
+        <path d="M 16 17 C 16 60, 46 60, 46 17 Q 45 14.5, 43 17 C 43 53, 19 53, 19 17 Q 17 14.5, 16 17 Z"/>
+        <text x="50" y="50" font-family="Fraunces, Lora, Georgia, serif" font-size="46" font-weight="600" letter-spacing="-0.6">nisomnia</text>
+      </svg>
+    </div>
+  </div>
+
+  <footer>
+    <p>Source: <code>src/components/Logo.astro</code> (Astro component) and <code>public/logo.svg</code> / <code>public/logo-light.svg</code> (static).</p>
+    <p style="margin-top:8px;">viewBox: <code>0 0 260 66</code> — 16px+ padding on all sides past the outermost letterforms; full wordmark visible at every size.</p>
+  </footer>
+</body>
+</html>

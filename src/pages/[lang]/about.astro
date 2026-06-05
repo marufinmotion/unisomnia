@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getStrings, LANGS, CONTACT_EMAIL } from '../../i18n';
+import { getStrings, LANGS, TELEGRAM_BOT_URL } from '../../i18n';
 import type { Lang } from '../../i18n';
 
 export function getStaticPaths() {
@@ -11,35 +11,71 @@ const lang = Astro.params.lang as Lang;
 const t = getStrings(lang);
 ---
 
-<Layout lang={lang} title={t.about.heading}>
-  <section class="page-container py-20">
-    <header class="mb-14 max-w-2xl">
-      <p class="eyebrow mb-3">{t.about.eyebrow}</p>
-      <h1 class="text-5xl">{t.about.heading}</h1>
-    </header>
+<Layout lang={lang} title={t.about.eyebrow}>
+  <section class="page-container py-24 md:py-32">
+    {/* Mission headline — large, centered Fraunces */}
+    <h1
+      class="mx-auto max-w-3xl text-center text-balance"
+      style="font-family: var(--font-display); font-size: clamp(2.25rem, 5.5vw, 3.5rem); font-weight: 600; line-height: 1.12; letter-spacing: -0.02em;"
+    >
+      {t.about.mission}
+    </h1>
 
-    <div class="prose-column space-y-12">
-      <div>
-        <p class="eyebrow mb-2">{t.about.missionTitle}</p>
-        <p class="text-lg leading-relaxed">{t.about.mission}</p>
-      </div>
-      <div>
-        <p class="eyebrow mb-2">{t.about.whoTitle}</p>
-        <p class="text-lg leading-relaxed">{t.about.who}</p>
-      </div>
-      <div>
-        <p class="eyebrow mb-2">{t.about.sourcesTitle}</p>
-        <p class="text-lg leading-relaxed">{t.about.sources}</p>
-      </div>
-      <div>
-        <p class="eyebrow mb-2">{t.about.contactTitle}</p>
-        <p class="text-lg leading-relaxed">
-          <a
-            href={`mailto:${CONTACT_EMAIL}`}
-            class="underline decoration-[color:var(--color-rule)] underline-offset-4 hover:decoration-[color:var(--color-red)] transition"
-          >{CONTACT_EMAIL}</a>
-        </p>
-      </div>
+    {/* Thin red 60px rule between headline and body */}
+    <span
+      aria-hidden="true"
+      class="mx-auto mt-12 mb-12 block w-[60px] h-[1.5px] bg-[color:var(--color-red)]"
+    ></span>
+
+    {/* Body: 3–4 paragraphs of flowing prose, max-width ~640px */}
+    <div
+      class="mx-auto max-w-[640px] space-y-7 text-lg leading-relaxed"
+      style="font-family: var(--font-body);"
+    >
+      <p>{t.about.p1}</p>
+      <p>{t.about.p2}</p>
+      <p>{t.about.p3}</p>
+      <p>{t.about.p4}</p>
     </div>
+
+    {/* Telegram CTA — soft red pill, same style as landing page */}
+    <div class="mt-16 flex justify-center">
+      <a
+        href={TELEGRAM_BOT_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="cta-pill group inline-flex items-center justify-center rounded-full bg-[color:var(--color-red-soft)] pl-14 pr-12 py-4 text-base font-medium text-[color:var(--color-beige)] transition-colors hover:bg-[color:var(--color-red)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[color:var(--color-ink)]"
+        style="gap: 12px;"
+      >
+        <span>{t.about.ctaButton}</span>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          width="20"
+          height="20"
+          fill="none"
+          stroke="#1A1A1A"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="cta-pill-arrow"
+        >
+          <path d="M5 12h14" />
+          <path d="m13 6 6 6-6 6" />
+        </svg>
+      </a>
+    </div>
+
+    <style>
+      @media (prefers-reduced-motion: no-preference) {
+        .cta-pill .cta-pill-arrow {
+          transition: transform 150ms ease-out;
+        }
+        .cta-pill:hover .cta-pill-arrow,
+        .cta-pill:focus-visible .cta-pill-arrow {
+          transform: translateX(2px);
+        }
+      }
+    </style>
   </section>
 </Layout>

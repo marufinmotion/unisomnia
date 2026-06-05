@@ -1,0 +1,8 @@
+{
+  "street-haberdoedas":        { "photographer": "Haberdoedas",     "unsplashId": "lMfoSbLyhQo", "url": "https://unsplash.com/photos/lMfoSbLyhQo" },
+  "street-annie-spratt":       { "photographer": "Annie Spratt",    "unsplashId": "VjofcQcxrF0", "url": "https://unsplash.com/photos/VjofcQcxrF0" },
+  "street-bruce-barrow-neon":  { "photographer": "Bruce Barrow",    "unsplashId": "wm0GwT6uXTk", "url": "https://unsplash.com/photos/wm0GwT6uXTk" },
+  "campus-brandon-griggs":     { "photographer": "Brandon Griggs",  "unsplashId": "flGt9PQpH2M", "url": "https://unsplash.com/photos/flGt9PQpH2M" },
+  "campus-zihao-wang":         { "photographer": "Zihao Wang",      "unsplashId": "6HzRIDaaGuQ", "url": "https://unsplash.com/photos/6HzRIDaaGuQ" },
+  "campus-bruce-barrow-path":  { "photographer": "Bruce Barrow",    "unsplashId": "w6ITJsA4UjU", "url": "https://unsplash.com/photos/w6ITJsA4UjU" }
+}

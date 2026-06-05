@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "flag-icons/css/flag-icons.min.css";
 
 @theme {
   --color-beige: #F4EDE0;
@@ -83,32 +84,35 @@ a { color: inherit; text-decoration: none; }
 }
 
 .country-prose .section-marker {
-  margin-top: 5rem;
+  margin-top: 6rem;
   margin-bottom: 0;
 }
 
+/* Phase 6 C.3: full content-column width rule, 2px, more visible. */
 .country-prose .section-marker .section-rule {
   display: block;
-  width: 60px;
-  height: 1.5px;
+  width: 100%;
+  height: 2px;
   background: var(--color-red);
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 
+/* Phase 6 C.3: +25% font size on the numbered eyebrow. */
 .country-prose .section-marker .section-eyebrow {
   display: block;
   font-family: var(--font-display);
-  font-size: 0.8125rem;
+  font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.18em;
   color: var(--color-red);
   font-weight: 500;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
+/* Phase 6 C.3: +15% heading size. */
 .country-prose h2 {
   font-family: var(--font-display);
-  font-size: clamp(1.625rem, 3.5vw, 2.125rem);
+  font-size: clamp(1.875rem, 4vw, 2.5rem);
   font-weight: 600;
   letter-spacing: -0.01em;
   margin-top: 0;
@@ -150,10 +154,318 @@ a { color: inherit; text-decoration: none; }
   }
   .reveal {
     opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transform: translateY(12px);
+    transition:
+      opacity 800ms cubic-bezier(0.25, 0.1, 0.25, 1),
+      transform 800ms cubic-bezier(0.25, 0.1, 0.25, 1);
   }
   .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* Stagger child elements within a revealed section (~80ms each) so the
+     content unfolds deliberately rather than appearing as a single block. */
+  .reveal.reveal-children > * {
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 600ms cubic-bezier(0.25, 0.1, 0.25, 1),
+      transform 600ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+  .reveal.reveal-children.is-visible > *:nth-child(1) { transition-delay: 80ms; }
+  .reveal.reveal-children.is-visible > *:nth-child(2) { transition-delay: 160ms; }
+  .reveal.reveal-children.is-visible > *:nth-child(3) { transition-delay: 240ms; }
+  .reveal.reveal-children.is-visible > *:nth-child(4) { transition-delay: 320ms; }
+  .reveal.reveal-children.is-visible > *:nth-child(5) { transition-delay: 400ms; }
+  .reveal.reveal-children.is-visible > *:nth-child(n+6) { transition-delay: 480ms; }
+  .reveal.reveal-children.is-visible > * {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Landing hero ---------- */
+
+.landing-subtitle {
+  margin-top: 24px;
+  max-width: 520px;
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--color-ink) 75%, transparent);
+}
+
+.landing-cta-wrap {
+  margin-top: 40px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.landing-figure {
+  margin: 0;
+}
+
+.landing-figure-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid rgba(26, 26, 26, 0.1);
+  background: color-mix(in srgb, var(--color-ink) 6%, transparent);
+}
+
+.landing-figure-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(0.8) sepia(0.05);
+}
+
+.landing-figure-caption {
+  margin-top: 0.625rem;
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  letter-spacing: 0.04em;
+  color: var(--color-ink-muted);
+  text-align: right;
+}
+
+/* Headline word-stagger entrance + subtitle fade-in + CTA slide-in.
+   Initial state (in the static CSS) is "shown" — we override to "hidden"
+   only when motion is allowed, so non-JS / reduced-motion users see the
+   final state immediately. */
+
+@media (prefers-reduced-motion: no-preference) {
+  .landing-headline .landing-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(8px);
+    animation: landing-word-in 500ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: var(--word-delay, 0ms);
+  }
+
+  .landing-subtitle {
+    opacity: 0;
+    animation: landing-subtitle-in 700ms ease-out 600ms forwards;
+  }
+
+  .landing-cta {
+    opacity: 0;
+    transform: translateX(20px);
+    animation:
+      landing-cta-in 500ms cubic-bezier(0.16, 1, 0.3, 1) 800ms forwards,
+      landing-cta-pulse 4s ease-out 2s infinite;
+  }
+
+  .landing-cta:hover,
+  .landing-cta:focus-visible,
+  .landing-cta:active {
+    animation:
+      landing-cta-in 500ms cubic-bezier(0.16, 1, 0.3, 1) 800ms forwards;
+  }
+}
+
+@keyframes landing-word-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes landing-subtitle-in {
+  to { opacity: 1; }
+}
+@keyframes landing-cta-in {
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes landing-cta-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(217, 85, 78, 0.4); }
+  70%  { box-shadow: 0 0 0 12px rgba(217, 85, 78, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(217, 85, 78, 0); }
+}
+
+/* ---------- Country hero image ---------- */
+
+.country-hero { margin: 0; }
+
+.country-hero-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  max-height: 380px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--color-ink) 6%, transparent);
+  border-radius: 2px;
+}
+
+/* Skeleton shimmer: visible while img is loading. Fades out on .is-loaded.
+   Phase 6 B.2: stronger visibility — 8% base, 14% highlight sweep, 1.4s cycle. */
+.country-hero-frame::before,
+.country-inline-frame::before,
+.landing-figure-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--color-ink) 8%, transparent);
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 250ms ease-out;
+  pointer-events: none;
+}
+
+.country-hero-frame.is-loaded::before,
+.country-inline-frame.is-loaded::before,
+.landing-figure-frame.is-loaded::before {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .country-hero-frame::before,
+  .country-inline-frame::before,
+  .landing-figure-frame::before {
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-ink) 8%, transparent) 0%,
+      color-mix(in srgb, var(--color-ink) 14%, transparent) 50%,
+      color-mix(in srgb, var(--color-ink) 8%, transparent) 100%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.4s ease-in-out infinite;
+  }
+}
+
+@keyframes skeleton-shimmer {
+  0%   { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+.country-hero-img,
+.country-inline-img {
+  position: relative;
+  z-index: 2;
+}
+
+.country-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.country-hero-caption {
+  margin-top: 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  color: var(--color-ink-muted);
+  letter-spacing: 0.02em;
+}
+
+/* ---------- Country inline image (between sections) ---------- */
+
+.country-inline {
+  margin: 0;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
+.country-inline-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 420px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--color-ink) 6%, transparent);
+  border-radius: 2px;
+}
+
+.country-inline-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.country-inline-caption {
+  margin-top: 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  color: var(--color-ink-muted);
+  letter-spacing: 0.02em;
+}
+
+/* ---------- Top navigation progress bar (B.2) ---------- */
+
+#nav-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: var(--color-red);
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: width 250ms cubic-bezier(0.25, 0.1, 0.25, 1), opacity 200ms ease-out;
+}
+#nav-progress.is-active {
+  opacity: 1;
+}
+#nav-progress.is-done {
+  width: 100% !important;
+  opacity: 0;
+  transition: width 150ms ease-out, opacity 250ms ease-out 100ms;
+}
+
+/* ---------- Catalogue card ---------- */
+
+.country-card-silhouette {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  height: 56px;
+  width: auto;
+  max-width: 60%;
+  color: var(--color-ink);
+  opacity: 0.06;
+  transition: opacity 250ms ease-out;
+  pointer-events: none;
+  z-index: 0;
+}
+.country-card:hover .country-card-silhouette {
+  opacity: 0.12;
+}
+
+.country-card-flag {
+  display: block;
+  width: 64px;
+  height: 48px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(26, 26, 26, 0.1);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .country-card {
+    transition: transform 250ms ease-out, box-shadow 250ms ease-out;
+    will-change: transform;
+  }
+  .country-card:hover {
+    transform: scale(1.025);
+    box-shadow: 0 8px 24px rgba(26, 26, 26, 0.08);
+  }
+
+  /* Stagger entrance for catalogue cards (first visit only — script
+     adds .stagger to <ul> and per-card --stagger-delay). */
+  #country-grid.stagger > li {
+    opacity: 0;
+    transform: translateY(8px);
+    animation: card-enter 250ms ease-out forwards;
+    animation-delay: var(--stagger-delay, 0ms);
+  }
+}
+
+@keyframes card-enter {
+  to {
     opacity: 1;
     transform: translateY(0);
   }

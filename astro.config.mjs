@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 import cloudflare from '@astrojs/cloudflare';
@@ -47,7 +48,11 @@ function remarkCountrySections() {
             type: 'paragraph',
             data: {
               hName: 'div',
-              hProperties: { className: 'section-marker', 'aria-hidden': 'true' },
+              hProperties: {
+                className: 'section-marker reveal',
+                'aria-hidden': 'true',
+                'data-section-reveal': '',
+              },
             },
             children: [
               {
@@ -89,7 +94,14 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkCountrySections],
   },
-
+  integrations: [
+    sitemap({
+      i18n: {
+        defaultLocale: 'ru',
+        locales: { ru: 'ru', tg: 'tg' },
+      },
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },
