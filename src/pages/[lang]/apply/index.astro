@@ -1,6 +1,5 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import CountrySilhouette from '../../../components/CountrySilhouette.astro';
 import { getStrings, LANGS, COUNTRY_ISO } from '../../../i18n';
 import type { Lang } from '../../../i18n';
 import { getCollection } from 'astro:content';
@@ -57,34 +56,32 @@ const countries = all
       </label>
     </div>
 
-    <ul id="country-grid" class="grid grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+    <ul id="country-grid">
       {countries.map((c, i) => (
         <li data-country-name={c.name.toLowerCase()}>
           <a
             href={`/${lang}/apply/${c.slug}`}
-            class="country-card group relative block border-t border-[color:var(--color-rule)] pt-6 cursor-pointer overflow-hidden"
+            class="country-card group cursor-pointer"
             aria-label={c.name}
           >
-            <CountrySilhouette slug={c.slug} class="country-card-silhouette" />
-            <div class="relative z-10">
-              <div class="mb-6 flex items-center justify-between">
-                <span class={`fi fi-${c.iso} country-card-flag`} aria-hidden="true"></span>
-                <span
-                  class="text-[color:var(--color-ink-muted)]"
-                  style="font-family: var(--font-display); font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase;"
-                >{String(i + 1).padStart(2, '0')}</span>
-              </div>
-              <h2
-                class="mb-2 group-hover:[text-decoration:underline] group-hover:[text-decoration-color:var(--color-red)] group-hover:[text-decoration-thickness:1.5px] group-hover:underline-offset-[6px]"
-                style="font-family: var(--font-display); font-size: 1.625rem; font-weight: 600; letter-spacing: -0.01em;"
-              >
-                {c.name}
-              </h2>
-              {c.tag && <p class="text-sm text-[color:var(--color-ink-muted)]">{c.tag}</p>}
+            <div class="mb-6 flex items-center justify-between">
+              <span class={`fi fi-${c.iso} country-card-flag`} aria-hidden="true"></span>
+              <span
+                class="text-[color:var(--color-ink-muted)]"
+                style="font-family: var(--font-display); font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase;"
+              >{String(i + 1).padStart(2, '0')}</span>
             </div>
+            <h2
+              class="mb-2 group-hover:[text-decoration:underline] group-hover:[text-decoration-color:var(--color-red)] group-hover:[text-decoration-thickness:1.5px] group-hover:underline-offset-[6px]"
+              style="font-family: var(--font-display); font-size: 1.625rem; font-weight: 600; letter-spacing: -0.01em;"
+            >
+              {c.name}
+            </h2>
+            {c.tag && <p class="text-sm text-[color:var(--color-ink-muted)]">{c.tag}</p>}
           </a>
         </li>
       ))}
+      <li class="catalog-filler" aria-hidden="true"></li>
     </ul>
 
     <p id="country-empty" hidden class="mt-16 text-center text-[color:var(--color-ink-muted)]">
@@ -101,6 +98,9 @@ const countries = all
       const items = Array.from(grid.querySelectorAll('[data-country-name]'));
       input.addEventListener('input', () => {
         const q = input.value.trim().toLowerCase();
+        // Toggle a flag class so the decorative filler cell is hidden while
+        // filtering (prevents a stray red grid cell as the count changes).
+        grid.classList.toggle('is-filtering', q.length > 0);
         let shown = 0;
         for (const li of items) {
           const name = li.getAttribute('data-country-name') || '';

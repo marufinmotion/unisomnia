@@ -106,5 +106,11 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  adapter: cloudflare()
+  // imageService: 'compile' runs Sharp at BUILD time and emits static
+  // optimized images (webp in _astro/). Required because every page here is
+  // prerendered and the Cloudflare Workers runtime cannot run Sharp — the
+  // default on-demand /_image endpoint 404s on the live deploy.
+  adapter: cloudflare({
+    imageService: 'compile',
+  }),
 });
